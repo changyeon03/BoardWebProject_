@@ -17,7 +17,7 @@
     <bean id="LoginInterceptor" class="BoardWeb.interceptor.LoginInterceptor"/>
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/board/*"/>
+            <mvc:mapping path="/**"/>
             <ref bean="LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

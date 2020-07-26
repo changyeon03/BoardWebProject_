@@ -3,9 +3,6 @@ package BoardWeb.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import BoardWeb.dto.UserDTO;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -15,15 +12,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
+        //dispatcher-servlet.xml에 인터셉터 설정은 모든 URL(/**)로 설정
+        //요청되는 URL에 "/login"이 포함되엉 ㅣㅆ는 경우 통과
+        String requestUrl = request.getRequestURL().toString();
+        if(requestUrl.contains("/login")||requestUrl.contains("/signup"))
+            return true;
+
         HttpSession session = request.getSession();
-        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        String user = (String) session.getAttribute("user");
 
-
-        if(userDTO == null){
+        if(user == null){
             response.sendRedirect("/login");
             return false;
         }
-
 
         return true;
     }

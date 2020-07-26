@@ -8,9 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>쪽지 쓰기</title>
 </head>
 <body>
-$END$
+<form action = "/writeMessage", method="post">
+    받는사람 : <input name="to_account" type="email" value="${to_account}">
+    <input name="from_account" type="hidden" value="${user}">
+    내용 : <input name="content" type="text">
+    <input type="submit" value="전송">
+</form>
 </body>
 </html>

@@ -5,7 +5,7 @@ import BoardWeb.service.UserService;
 
 import java.sql.Timestamp;
 
-public class MsgDTO {
+public class MessageDTO {
     protected Long id;
 
     public Long getId() {

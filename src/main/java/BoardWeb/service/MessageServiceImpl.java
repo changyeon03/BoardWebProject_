@@ -1,7 +1,7 @@
 package BoardWeb.service;
 
-import BoardWeb.dto.MsgDTO;
-import BoardWeb.repository.MsgMapper;
+import BoardWeb.dto.MessageDTO;
+import BoardWeb.repository.MessageMapper;
 import BoardWeb.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MsgServiceImpl implements MsgService {
+public class MessageServiceImpl implements MessageService {
 
     @Autowired
-    MsgMapper msgMapper;
+    MessageMapper messageMapper;
 
     @Autowired
     UserMapper userMapper;
 
     @Override
-    public List<MsgDTO> getMyMessage(Long id) {
-        return msgMapper.getMyMessage(id);
+    public List<MessageDTO> getMyMessage(String to_account) {
+        return messageMapper.getMyMessage(to_account);
     }
 
     @Override
-    public String whoSent(Long id) {
-        return userMapper.getAccountFromId(id);
+    public void sendMessage(MessageDTO messageDTO) {
+        messageMapper.sendMessage(messageDTO);
     }
 }
