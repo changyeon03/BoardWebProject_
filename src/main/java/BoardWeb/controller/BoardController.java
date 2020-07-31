@@ -1,10 +1,7 @@
 package BoardWeb.controller;
 
-import BoardWeb.dto.BoardDTO;
-import BoardWeb.dto.CriteriaDTO;
-import BoardWeb.dto.PageDTO;
-import BoardWeb.dto.ReplyDTO;
-import BoardWeb.repository.UserMapper;
+import BoardWeb.domain.Board;
+import BoardWeb.domain.Reply;
 import BoardWeb.service.BoardService;
 import BoardWeb.service.ReplyService;
 import BoardWeb.service.UserService;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -31,7 +27,7 @@ public class BoardController {
     //게시판 (view)
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     public String getBoardList(Model model) throws Exception {
-        List<BoardDTO> list = boardService.getBoardList();
+        List<Board> list = boardService.getBoardList();
         model.addAttribute("list", list);
         return "list";
     }
@@ -50,56 +46,52 @@ public class BoardController {
     }
     */
 
-    //게시글 작성 GET
+    //게시글 작성 (get)
     @RequestMapping(value = "/board/write", method = RequestMethod.GET)
-    public String getWrite(Model model, HttpSession httpSession) throws Exception {
+    public String getWrite(Model model) throws Exception {
         //세션에 있는 정보를 이용해 계정과 닉네임을 뷰로 넘겨줌.
-        model.addAttribute("user", httpSession.getAttribute("user"));
-        model.addAttribute("nick_name", userService.getNick_name(httpSession.getAttribute("user")));
         return "write";
     }
 
-    //게시글 작성 POST
+    //게시글 작성 (post)
     @RequestMapping(value = "/board/write", method = RequestMethod.POST)
-    public String writeBoard(BoardDTO boardDTO) throws Exception {
-        boardService.write(boardDTO);
+    public String writeBoard(Board board) throws Exception {
+        boardService.write(board);
         return "redirect:/board";
     }
 
-    //게시글 조회
+    //게시글 보기
     @RequestMapping(value = "/board/{id}", method = RequestMethod.GET)
-    public String viewBoard(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
-        //게시글, 댓글 view로 전달
-        model.addAttribute("view", (List<BoardDTO>)boardService.view(id, httpSession.getAttribute("user")));
-        model.addAttribute("reply", (List<ReplyDTO>)replyService.getReplyList(id));
-        //유저 정보 view로 전달
-        model.addAttribute("user", httpSession.getAttribute("user"));
-        model.addAttribute("nick_name", userService.getNick_name(httpSession.getAttribute("user")));
+    public String viewBoard(@PathVariable("id") Long id, Model model) {
+        //게시글, 댓글 리스트 view로 전달
+        model.addAttribute("view", (List<Board>) boardService.view(id, userService.getUserID()));
+        model.addAttribute("reply", (List<Reply>) replyService.getReplyList(id));
         return "view";
     }
 
     //게시글 삭제
     @RequestMapping(value = "/board/delete/{id}", method = RequestMethod.GET)
-    public String deleteBoard(@PathVariable("id") Long id, HttpSession httpSession) {
-        if(boardService.delete(id, httpSession.getAttribute("user")))
+    public String deleteBoard(@PathVariable("id") Long id) {
+        if(boardService.delete(id, userService.getUserID()))
             return "redirect:/board";
         else return "redirect:/board/"+id;
     }
 
-    //게시글 수정
+    //게시글 수정 (get)
     @RequestMapping(value = "/board/modify/{id}", method = RequestMethod.GET)
-    public String modify(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
-        model.addAttribute("modify", (List<BoardDTO>)boardService.view(id));
-        if(boardService.checkSame(id, httpSession.getAttribute("user")))
+    public String modify(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("modify", (List<Board>)boardService.view(id));
+        if(boardService.checkSame(id, userService.getUserID()))
             return "modify";
         else
             return "redirect:/board/"+id;
     }
 
+    //게시물 수정 (post)
     @RequestMapping(value = "/board/modify", method = RequestMethod.POST)
-    public String modify(BoardDTO boardDTO) {
-        boardService.modify(boardDTO);
-        return "redirect:/board/"+boardDTO.getId();
+    public String modify(Board board) {
+        boardService.modify(board);
+        return "redirect:/board/"+ board.getId();
     }
 
 }

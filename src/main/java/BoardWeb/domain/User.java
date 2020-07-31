@@ -1,8 +1,8 @@
-package BoardWeb.dto;
+package BoardWeb.domain;
 
 import java.sql.Timestamp;
 
-public class UserDTO {
+public class User {
     protected Long id;
     protected String account;
     protected String password;

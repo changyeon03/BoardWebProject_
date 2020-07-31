@@ -1,17 +1,15 @@
 package BoardWeb.service;
 
-import BoardWeb.dto.BoardDTO;
-import BoardWeb.repository.BoardMapper;
+import BoardWeb.domain.Board;
 
 import java.util.List;
 
 public interface BoardService {
-    public List<BoardDTO> getBoardList();
-    public void write(BoardDTO boardDTO);
-    public List<BoardDTO> view(Long id, Object user);
-    public List<BoardDTO> view(Long id);
-    public boolean delete(Long id, Object user);
-    public void modify(BoardDTO boardDTO);
-    public boolean checkSame(Long id, Object user);
-    public int getTotalBoard();
+    public List<Board> getBoardList();
+    public void write(Board board);
+    public List<Board> view(Long id, Long user_id);
+    public List<Board> view(Long id);
+    public boolean delete(Long id, Long user);
+    public void modify(Board board);
+    public boolean checkSame(Long id, Long user);
 }

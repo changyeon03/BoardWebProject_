@@ -1,13 +1,16 @@
-package BoardWeb.dto;
+package BoardWeb.domain;
 
 import java.sql.Timestamp;
 
-public class ReplyDTO {
+public class Reply {
     protected Long id;
     protected Long board_id;
-    protected String writer_account;
+    protected Long user_id;
     protected String nick_name;
     protected String content;
+    protected boolean deleted;
+    protected Timestamp created_at;
+    protected Timestamp updated_at;
 
     public Long getId() {
         return id;
@@ -25,12 +28,12 @@ public class ReplyDTO {
         this.board_id = board_id;
     }
 
-    public String getWriter_account() {
-        return writer_account;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setWriter_account(String writer_account) {
-        this.writer_account = writer_account;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getNick_name() {
@@ -57,14 +60,6 @@ public class ReplyDTO {
         this.deleted = deleted;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
-    }
-
     public Timestamp getCreated_at() {
         return created_at;
     }
@@ -73,7 +68,11 @@ public class ReplyDTO {
         this.created_at = created_at;
     }
 
-    protected boolean deleted;
-    protected Timestamp updated_at;
-    protected Timestamp created_at;
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
+    }
 }

@@ -14,13 +14,12 @@
 </head>
 <body>
     <c:forEach var="view" items="${view}">
-        작성자 : ${view.writer_account} <br>
         닉네임 : ${view.nick_name} <br>
         작성일 : ${view.created_at} <br>
         제목 : ${view.title} <br>
         내용 : ${view.content} <br>
         조회수 : ${view.view_count} <br>
-        추천수 : ${view.good} <br>
+        <a href ="/board">목록으로</a>
         <a href = "/board/modify/${view.id}">게시글 수정</a>
         <a href = "/board/delete/${view.id}">게시물 삭제</a>
         <br>
@@ -37,9 +36,9 @@
 
 <form action="/reply" method="post">
     <c:forEach var="view" items="${view}">
-        <input name="board_id" type="hidden" value="${view.id}" readonly="true">
+        <input name="board_id" type="hidden" value="${view.id}">
+        <input name="user_id" type="hidden" value="${userID}">
         <label> 작성자 :</label>
-        <input name="writer_account" type="hidden" value="${user}" readonly="true">
         <input name="nick_name" value="${nick_name}" readonly="ture">
         <labeㅣ> 내용 :</labeㅣ>
         <input name="content" type="text">

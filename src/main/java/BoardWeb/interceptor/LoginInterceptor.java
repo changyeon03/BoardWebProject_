@@ -13,15 +13,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
             throws Exception {
 
         //dispatcher-servlet.xml에 인터셉터 설정은 모든 URL(/**)로 설정
-        //요청되는 URL에 "/login"이 포함되엉 ㅣㅆ는 경우 통과
+        //요청되는 URL에 "/login", "/signup"이 포함되어 있는 경우 통과
         String requestUrl = request.getRequestURL().toString();
         if(requestUrl.contains("/login")||requestUrl.contains("/signup"))
             return true;
 
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("user");
+        Long userID = (Long)session.getAttribute("userID");
 
-        if(user == null){
+        if(userID == null){
             response.sendRedirect("/login");
             return false;
         }

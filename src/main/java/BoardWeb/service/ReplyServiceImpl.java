@@ -1,6 +1,6 @@
 package BoardWeb.service;
 
-import BoardWeb.dto.ReplyDTO;
+import BoardWeb.domain.Reply;
 import BoardWeb.repository.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +13,24 @@ public class ReplyServiceImpl implements ReplyService{
     @Autowired
     ReplyMapper replyMapper;
 
+    @Autowired
+    UserService userService;
+
     @Override
-    public List<ReplyDTO> getReplyList(Long board_id) {
+    //댓글 리스트
+    public List<Reply> getReplyList(Long board_id) {
         return replyMapper.viewReply(board_id);
     }
 
     @Override
-    public void writeReply(ReplyDTO replyDTO) {
-        replyMapper.writeReply(replyDTO);
+    //댓글 쓰기
+    public void writeReply(Reply reply) {
+        replyMapper.writeReply(reply);
     }
 
     @Override
-    public Long deleteReply(Long id, Object user) {
+    //댓글 삭제
+    public Long deleteReply(Long id, Long user) {
         if(checkSame(id, user)) {
             replyMapper.deleteReply(id);
         }
@@ -32,23 +38,21 @@ public class ReplyServiceImpl implements ReplyService{
     }
 
     @Override
-    public List<ReplyDTO> getReply(Long id) {
+    //댓글 읽기
+    public List<Reply> getReply(Long id) {
         return replyMapper.getReply(id);
     }
 
     @Override
-    public Long modifyReply(ReplyDTO replyDTO) {
-        replyMapper.modifyReply(replyDTO);
-        return replyMapper.getBoard_id(replyDTO.getId());
+    //댓글 수정
+    public Long modifyReply(Reply reply) {
+        replyMapper.modifyReply(reply);
+        return replyMapper.getBoard_id(reply.getId());
     }
 
     @Override
-    public boolean checkSame(Long id, Object user) {
-        return ((String) user).equals((String) replyMapper.getWriterAccount(id));
+    public boolean checkSame(Long id, Long user) {
+        return (replyMapper.getUserId(id)==user);
     }
 
-    @Override
-    public Long getBoardId(Long id) {
-        return replyMapper.getBoard_id(id);
-    }
 }

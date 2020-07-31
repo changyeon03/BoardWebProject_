@@ -17,8 +17,7 @@
 <form action="/board/modify", method="post">
 <c:forEach var="modify" items="${modify}">
     <input name="id" type="hidden" value="${modify.id}">
-    <label>작성자 :</label>
-    <input name="writer_account" value="${modify.writer_account}" type="email" readonly="true"><br>
+    <input name="user_id" type="hidden" value="${userID}">
     <label>닉네임 :</label>
     <input name="nick_name" value="${modify.nick_name}" readonly="true" type="text"><br>
     <label>제목 :</label>

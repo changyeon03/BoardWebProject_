@@ -1,10 +1,10 @@
 package BoardWeb.service;
 
-import BoardWeb.dto.MessageDTO;
+import BoardWeb.domain.Message;
 
 import java.util.List;
 
 public interface MessageService {
-    List<MessageDTO> getMyMessage(String to_account);
-    void sendMessage(MessageDTO messageDTO);
+    List<Message> getMyMessage(Long to_user_id);
+    void sendMessage(Long from_user_id, Long to_user_id, String content);
 }

@@ -15,7 +15,7 @@
 <body>
 <a href="/writeMessage">쪽지쓰기</a> <br>
 <c:forEach var="msg" items="${msg}">
-    보낸사람 : ${msg.from_account}<br>
+    보낸사람 : ${msg.from_user_nick_name}<br>
     작성일 : ${msg.sent_at} <br>
     내용 : ${msg.content} <br>
     <br>

@@ -12,8 +12,8 @@
 </head>
 <body>
 <form action = "/writeMessage", method="post">
-    받는사람 : <input name="to_account" type="email">
-    <input name="from_account" type="hidden" value="${user}">
+    <input name="from_user_id" type="hidden" value="${userID}">
+    받는사람 : <input name="to_user_nick_name" value="${to_user_nick_name}">
     내용 : <input name="content" type="text">
     <input type="submit" value="전송">
 </form>

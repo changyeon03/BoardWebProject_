@@ -10,12 +10,12 @@ import java.sql.Timestamp;
 
 @Repository
 public interface ViewMapper {
-    @Select(value = "SELECT viewed_at FROM view WHERE board_id = #{board_id} AND viewer = #{viewer}")
-    public Timestamp getViewed_at(@Param("board_id") Long board_id, @Param("viewer") String viewer);
+    @Select(value = "SELECT viewed_at FROM view_record WHERE board_id = #{board_id} AND user_id = #{user_id}")
+    public Timestamp getViewed_at(@Param("board_id") Long board_id, @Param("user_id") Long user_id);
 
-    @Insert(value = "INSERT INTO view(board_id, viewer) VALUES(#{board_id}, #{viewer})")
-    public void insertViewed_at(@Param("board_id") Long board_id, @Param("viewer") String viewer);
+    @Insert(value = "INSERT INTO view_record(board_id, user_id) VALUES(#{board_id}, #{user_id})")
+    public void insertViewed_at(@Param("board_id") Long board_id, @Param("user_id") Long user_id);
 
-    @Update(value = "UPDATE view SET viewed_at=now() WHERE board_id = #{board_id} AND viewer = #{viewer}")
-    public void setViewed_at(@Param("board_id") Long board_id, @Param("viewer") String viewer);
+    @Update(value = "UPDATE view_record SET viewed_at=now() WHERE board_id = #{board_id} AND user_id = #{user_id}")
+    public void setViewed_at(@Param("board_id") Long board_id, @Param("user_id") Long user_id);
 }

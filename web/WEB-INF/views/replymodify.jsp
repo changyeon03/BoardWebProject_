@@ -15,8 +15,7 @@
 <c:forEach var="reply" items="${reply}">
     <form action="/reply/modify", method="post">
     <input name="id" type="hidden" value="${reply.id}">
-    <input name="writer_account" type="hidden" value="${reply.writer_account}" type="email" readonly="true"><br>
-    <input name="nick_name" type="hidden" value="${reply.nick_name}" readonly="true" type="text"><br>
+    <input name="nick_name" type="hidden" value="${nick_name}" readonly="true" type="text"><br>
     <label>내용 :</label>
     <input name="content" type="text" style="width:200px; height:50px;"><br>
     <input type="submit" value="수정">

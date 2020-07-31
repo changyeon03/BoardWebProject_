@@ -8,9 +8,10 @@
 </head>
 <body>
 <h2>게시글 목록</h2>
+${nick_name}으로 접속중 <br>
 <a href ="/board/write">글쓰기</a>
 <a href ="/logout">로그아웃</a>
-<a href="/msg">쪽지함</a>
+<a href="/message">쪽지함</a>
 <table border="1" width="600px">
     <tr align="center">
         <th>번호</th>

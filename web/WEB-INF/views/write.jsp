@@ -13,15 +13,12 @@
 </head>
 <body>
     <form action="/board/write", method="post">
-        <label> 계정 :</label>
-        <input name="writer_account" value="${user}" readonly="true" > <br>
-        <label>닉네임 :</label>
-        <input name="nick_name" value="${nick_name}" readonly="true" type="text" ><br>
+        <input name="user_id" value="${userID}" type="hidden">
+        <input name="nick_name" value="${nick_name}" type="hidden" ><br>
         <label>제목 :</label>
         <input name="title" type="text"><br>
         <label>내용 :</label>
         <input name="content" type="text" style="width:200px; height:50px;"><br>
-
         <input type="submit" value="작성">
     </form>
 </body>

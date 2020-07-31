@@ -1,11 +1,11 @@
-package BoardWeb.dto;
+package BoardWeb.domain;
 
 import java.sql.Timestamp;
 
-public class ViewDTO {
+public class View {
     protected Long id;
     protected Long board_id;
-    protected String viewer;
+    protected Long user_id;
     protected Timestamp viewed_at;
 
     public Long getId() {
@@ -24,12 +24,12 @@ public class ViewDTO {
         this.board_id = board_id;
     }
 
-    public String getViewer() {
-        return viewer;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setViewer(String viewer) {
-        this.viewer = viewer;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public Timestamp getViewed_at() {
